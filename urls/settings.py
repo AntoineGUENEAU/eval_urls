@@ -58,7 +58,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'intranet_phonecenter', 'templates'),
+            os.path.join(BASE_DIR, 'urls', 'templates'),
+            os.path.join(BASE_DIR, 'urls_items', 'templates'), # No needed thanks to APP_DIRS
+            os.path.join(BASE_DIR, 'users', 'templates'), # No needed thanks to APP_DIRS
         ],
         'APP_DIRS': True,
         'OPTIONS': {
