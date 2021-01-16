@@ -1,0 +1,36 @@
+{% extends "urls_items/base.html" %}
+
+{% block content %}
+<a class="float-right btn btn-primary" href="{% url 'urls_items:store' %}" role="button">Nouvelle url</a>
+
+<h2>Liste des urls</h2>
+
+{% if urls %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for url in urls %}
+        <tr>
+            <th scope="row">{{ url }}</th>
+            <td>
+                <a class="btn btn-primary" href="{% url 'urls_items:edit' url.id %}">Modifier</a>
+                <a class="btn btn-primary" href="{% url 'urls_items:delete' url.id %}">Supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+
+<p>Aucune urls n'ont encore été saisi</p>
+
+{% endif %}
+
+{% endblock content %}
