@@ -24,10 +24,10 @@
                                     ❌
                                 {% endif %}
                             </li>
-                            <li>Code HTTP : 
-                                {{ url_result.http_code }}
-                            </li>
                             {% if url_result.success %}
+                                <li>Code HTTP : 
+                                    {{ url_result.http_code }}
+                                </li>
                                 <li>Présence de texte sur la page : 
                                     {{ url_result.has_text }}
                                 </li>

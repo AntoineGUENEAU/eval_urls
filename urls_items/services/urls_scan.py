@@ -88,12 +88,15 @@ class UrlScan():
         return 
 
     def sendMail(self, error_urls):
-        send_mail(
+        try:
+           send_mail(
             'Url en erreurs',
             self.formatMailContent(error_urls),
             settings.EMAIL_FROM_ERRORS,
             [settings.EMAIL_DEST_ERRORS],
         )
+        except Exception as err:
+            return
 
     def formatMailContent(self, error_urls):
         content = '<h1>Voici la liste des ursl en erreur</h1>'

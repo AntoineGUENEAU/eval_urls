@@ -13,4 +13,5 @@ urlpatterns = [
         cbv.UrlDeleteView.as_view(),
         name="delete"
     ),
+    path('handle_scan/', views.handle_scan, name="handle_scan"),
 ]

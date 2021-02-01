@@ -5,7 +5,7 @@ from .models import Url
 from urls_results.models import Result
 from .forms import UrlForm
 from django.db.models import Q
-from pprint import pprint
+from urls_items.services.urls_scan import UrlScan
 
 def store(request):
     if request.method == 'POST':
@@ -68,3 +68,8 @@ def show(request, url_id):
             'url': current_instance,
         }
     )
+
+def handle_scan(request):
+    service = UrlScan()
+    service.handle()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
