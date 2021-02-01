@@ -2,18 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Url
+from urls_results.models import Result
 from .forms import UrlForm
 from django.db.models import Q
-
-# Create your views here.
-def hello(request):
-    return render(
-        request,
-        'urls_items/hello.html',
-        {
-            'message': "Hello World!",
-        }
-    )
+from pprint import pprint
 
 def store(request):
     if request.method == 'POST':
@@ -61,5 +53,18 @@ def edit(request, url_id=None):
         {
             'title': "Appel",
             'form':form,
+        }
+    )
+
+def show(request, url_id):
+    current_instance = Url.objects.get(
+        Q(id = url_id),
+    )
+    return render(
+        request,
+        "urls_items/detail.html",
+        {
+            'url_results': Result.objects.filter(url__pk=url_id).order_by("-id"),
+            'url': current_instance,
         }
     )

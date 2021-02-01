@@ -1,9 +1,9 @@
 {% extends "urls_items/base.html" %}
 
 {% block content %}
-<a class="float-right btn btn-primary" href="{% url 'urls_items:store' %}" role="button">Nouvelle url</a>
+<a class="mb-5 float-right btn btn-primary" href="{% url 'urls_items:store' %}" role="button">Nouvelle url</a>
 
-<h2>Liste des urls</h2>
+<h2 class="mt-5">Liste des urls</h2>
 
 {% if urls %}
 
@@ -12,7 +12,7 @@
         <tr>
             <th scope="col">Nom de l'url</th>
             <th scope="col">Lien de l'url</th>
-            <th scope="col">Action</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -21,8 +21,9 @@
             <th scope="row">{{ url.name }}</th>
             <th scope="row">{{ url.url }}</th>
             <td>
-                <a class="btn btn-primary" href="{% url 'urls_items:edit' url.id %}">Modifier</a>
-                <a class="btn btn-primary" href="{% url 'urls_items:delete' url.id %}">Supprimer</a>
+                <a class="btn btn-primary" href="{% url 'urls_items:show' url.id %}">Voir les rappors</a>
+                <a class="btn btn-warning" href="{% url 'urls_items:edit' url.id %}">Modifier</a>
+                <a class="btn btn-danger" href="{% url 'urls_items:delete' url.id %}">Supprimer</a>
             </td>
         </tr>
     {% endfor %}

@@ -22,5 +22,7 @@ app_name = 'urls'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'users/', include('users.urls', namespace='users')),
-    path(r'urls_items/', include('urls_items.urls', namespace='urls_items')),
+    path(r'urls/', include('urls_items.urls', namespace='urls_items')),
+    path(r'urls-rapports/', include('urls_results.urls', namespace='urls_results')),
+
 ]

@@ -27,12 +27,16 @@ class Command(BaseCommand):
             result.url = url
 
             try:
+                start = datetime.datetime.now()
                 response = http.get(urlFormated)
+                end = datetime.datetime.now()
+                # delay = end - start
+                delay = 'TODO'
             except Exception as err:
                 result.success = False
                 print("Url invalide : %s" % err)
             else:
-                self.successRequest(response, result)
+                self.successRequest(response, result, delay)
             
             result.save()
 
@@ -58,11 +62,11 @@ class Command(BaseCommand):
         http.mount("http://", adapter)
         return http
 
-    def successRequest(self, response, result):
+    def successRequest(self, response, result, delay):
         result.success = True
         result.http_code = self.check_http_code(response, result)
         result.has_text = self.check_has_text(response, result)
-        result.answer_delay = self.check_answer_delay(response, result)
+        result.answer_delay = delay
         result.ssl_certificat_validation = self.check_ssl_certificat_validation(response, result)
         result.ssl_delay_before = self.check_ssl_delay_before(response, result)
         return result
@@ -71,13 +75,12 @@ class Command(BaseCommand):
         return int(response.status_code)
 
     def check_has_text(self, response, result):
-        return 
+        return response.content != ''
 
-    def check_answer_delay(self, response, result):
-        return 
-
+    # TODO
     def check_ssl_certificat_validation(self, response, result):
         return 
 
+    # TODO
     def check_ssl_delay_before(self, esponse, result):
         return 

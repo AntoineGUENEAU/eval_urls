@@ -4,10 +4,10 @@ from urls_items import views, cbv
 
 app_name = 'urls_items'
 urlpatterns = [
-    path('hello/', views.hello, name="hello"),
-    path('new_url/', views.store, name="store"),
-    path('urls/', views.index, name="index"),
+    path('nouveau/', views.store, name="store"),
+    path('', views.index, name="index"),
     path('url-<int:url_id>/', views.edit, name="edit"),
+    path('url-detail-<int:url_id>/', views.show, name="show"),
     path(
         'delete-<int:pk>/',
         cbv.UrlDeleteView.as_view(),

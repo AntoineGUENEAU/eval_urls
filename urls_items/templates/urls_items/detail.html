@@ -1,0 +1,59 @@
+{% extends "urls_items/base.html" %}
+
+{% block content %}
+
+<h2 class="m-5">Resultats pour l'url "{{ url.name }}"</h2>
+
+<div class="container">
+    {% if url_results %}
+
+        {% for url_result in url_results %}
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Rapport du {{ url_result.date }} 
+                        <span class="float-right">
+                            <a class="btn btn-danger" href="{% url 'urls_results:delete' url_result.id %}">X</a>
+                        </span>
+                    </h5>
+                    <div>
+                        <ul>
+                            <li>Succès : 
+                                {% if url_result.success %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </li>
+                            <li>Code HTTP : 
+                                {{ url_result.http_code }}
+                            </li>
+                            {% if url_result.success %}
+                                <li>Présence de texte sur la page : 
+                                    {{ url_result.has_text }}
+                                </li>
+                                <li>Temps de réponse : 
+                                    {{ url_result.answer_delay }}
+                                </li>
+                                <li>Validation du certificat SSL : 
+                                    {{ url_result.ssl_certificat_validation }}
+                                </li>
+                                <li>Délai avant expiration : 
+                                    {{ url_result.ssl_delay_before }}
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% else %}
+
+        <p>Aucunes données n'est disponible pour le moment</p>
+
+    {% endif %}
+</div>
+
+<a class="mt-5 float-right btn btn-primary" href="{% url 'urls_items:index' %}" role="button">Retour</a>
+
+{% endblock content %}

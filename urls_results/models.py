@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import BaseModel
 from urls_items.models import Url
+from django import forms
 
 class Result(BaseModel):
 
@@ -35,7 +36,7 @@ class Result(BaseModel):
         null=True,
     )
 
-    answer_delay = models.IntegerField(
+    answer_delay = models.TextField(
         verbose_name="Temps de réponse",
         default=None,
         blank=True,
@@ -64,7 +65,7 @@ class Result(BaseModel):
     )
 
     def __str__(self):
-        return self.url + " / " + self.date
+        return self.url.url
 
     class Meta:
         verbose_name = "Résultats suite a l'appel http"
