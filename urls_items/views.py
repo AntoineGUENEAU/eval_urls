@@ -52,6 +52,7 @@ def edit(request, url_id=None):
         form = form_class(request.POST, instance = current_instance)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect(reverse("urls_items:index"))
     else:
         form = form_class(instance = current_instance)
     return render(

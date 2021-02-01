@@ -6,4 +6,4 @@ class UrlForm(ModelFormWithSubmit):
     
     class Meta:
         model = Url
-        fields = ('name',)
+        fields = ('name','url',)

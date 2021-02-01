@@ -10,14 +10,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Nom</th>
+            <th scope="col">Nom de l'url</th>
+            <th scope="col">Lien de l'url</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
     {% for url in urls %}
         <tr>
-            <th scope="row">{{ url }}</th>
+            <th scope="row">{{ url.name }}</th>
+            <th scope="row">{{ url.url }}</th>
             <td>
                 <a class="btn btn-primary" href="{% url 'urls_items:edit' url.id %}">Modifier</a>
                 <a class="btn btn-primary" href="{% url 'urls_items:delete' url.id %}">Supprimer</a>
