@@ -131,3 +131,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_HOST = "localhost"
+
+EMAIL_PORT = 1025
+
+EMAIL_FROM_ERRORS = "eval_django@mds.com"
+
+EMAIL_DEST_ERRORS = "gueneau.antoine@gmail.com"

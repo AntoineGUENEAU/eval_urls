@@ -8,6 +8,8 @@ from django.utils import timezone
 from requests.adapters import HTTPAdapter
 from urls_items.models import Url
 from urls_results.models import Result
+from django.core.mail import send_mail
+from django.conf import settings
 
 # CURRENT_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -17,6 +19,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         http = self.initHttpClient()
+
+        error_urls = []
 
         for url in Url.objects.all():
 
@@ -35,11 +39,13 @@ class Command(BaseCommand):
             except Exception as err:
                 result.success = False
                 print("Url invalide : %s" % err)
+                error_urls.append(urlFormated)
             else:
                 self.successRequest(response, result, delay)
             
             result.save()
-
+      
+        self.sendMail( error_urls )
 
     def formatUrl(self, url):
         print("Check url  : " + str(url))
@@ -84,3 +90,23 @@ class Command(BaseCommand):
     # TODO
     def check_ssl_delay_before(self, esponse, result):
         return 
+
+
+    def sendMail(self, error_urls):
+        send_mail(
+            'Url en erreurs',
+            self.formatMailContent(error_urls),
+            settings.EMAIL_FROM_ERRORS,
+            [settings.EMAIL_DEST_ERRORS],
+        )
+
+    def formatMailContent(self, error_urls):
+        content = '<h1>Voici la liste des ursl en erreur</h1>'
+        content += '<ul>'
+        for error_url in error_urls :
+            content += '<li>' + error_url +'<li>'
+
+        content += '</ul>'
+        return content
+
+        
