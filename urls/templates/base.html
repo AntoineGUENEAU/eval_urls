@@ -18,26 +18,36 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Gestion d'urls</a>
+      <a class="navbar-brand" href="{% url 'urls_items:index' %}">Gestion d'urls</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-
+      <div class="float-right">
+        <a href="{% url 'admin:index' %}">admin</a>
       </div>
     </nav>
 
     {% block body_header %}{% endblock body_header %}
     <main role="main" class="container" style="padding-top:60px;">
 
+      {% if messages %}
+        <ul class="messages list-unstyled">
+            {% for message in messages %}
+              <li>
+                <div class="alert {% if message.tags %} alert-{{ message.tags }} {% else %} class='alert-primary %} {% endif %}" role="alert">
+                  {{ message }}
+                </div>
+              </li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+
       <div class="starter-template">
         {% block content %}{% endblock content %}
       </div>
 
     </main>
-
     {% block body_footer %}{% endblock body_footer %}
 
   </body>

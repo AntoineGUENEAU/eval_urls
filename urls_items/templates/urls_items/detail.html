@@ -47,6 +47,24 @@
             </div>
         {% endfor %}
 
+        <div class="pagination mt-4">
+            <span class="step-links" style="margin: 0 auto;">
+                {% if url_results.has_previous %}
+                    <a class="btn btn-primary" href="?page=1">&laquo; Première</a>
+                    <a class="btn btn-primary"  href="?page={{ resultsPaginator.previous_page_number }}">Précedante</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ url_results.number }} sur {{ url_results.paginator.num_pages }}
+                </span>
+        
+                {% if url_results.has_next %}
+                    <a class="btn btn-primary"  href="?page={{ url_results.next_page_number }}">Suivante</a>
+                    <a class="btn btn-primary"  href="?page={{ url_results.paginator.num_pages }}">Dernière &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
     {% else %}
 
         <p>Aucunes données n'est disponible pour le moment</p>
